@@ -1,18 +1,16 @@
 {
   "canisters": {
-    "portfolio_backend": {
-      "main": "src/portfolio_backend/main.mo",
+    "portfolio": {
+      "main": "src/backend/main.mo",
       "type": "motoko"
     },
     "portfolio_frontend": {
-      "dependencies": [
-        "portfolio_backend"
-      ],
-      "source": [
-        "src/portfolio_frontend/dist"
-      ],
-      "type": "assets",
-      "workspace": "portfolio_frontend"
+      "dependencies": ["portfolio"],
+      "frontend": {
+        "entrypoint": "src/frontend/index.html"
+      },
+      "source": ["src/frontend/assets", "dist/portfolio_frontend/"],
+      "type": "assets"
     }
   },
   "defaults": {
@@ -21,6 +19,11 @@
       "packtool": ""
     }
   },
-  "output_env_file": ".env",
+  "networks": {
+    "local": {
+      "bind": "127.0.0.1:8000",
+      "type": "ephemeral"
+    }
+  },
   "version": 1
 }
